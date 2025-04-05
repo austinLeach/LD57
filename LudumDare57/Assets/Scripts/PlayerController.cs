@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private int defaultLayer;
     public string noCollisionLayerName = "no collision";
     bool isInvincible = false;
-    float invincibleTime = .25f;
+    float invincibleTime = .3f;
     bool inLockout = false;
     float invincibleLockoutTime = 1f;
 
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         {
             isInvincible = true;
             inLockout = true;
-            invincibleLockoutTime = 1f;
+            invincibleLockoutTime = .75f;
             StartCoroutine(Invincibility());
         }
     }
