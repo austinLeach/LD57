@@ -18,6 +18,9 @@ LudemDare57/[Mm]emoryCaptures/
 # Recordings can get excessive in size
 LudemDare57/[Rr]ecordings/
 
+# Asset meta data should only be ignored when the corresponding asset is also ignored
+!LudumDare47/[Aa]ssets/**/*.meta
+
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
 
