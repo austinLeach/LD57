@@ -833,6 +833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   laneDistance: 4
+  noCollisionLayerName: no collision
 --- !u!1 &1402622065
 GameObject:
   m_ObjectHideFlags: 0
