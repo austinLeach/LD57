@@ -2,23 +2,24 @@ using UnityEngine;
 
 public class CameraMover : MonoBehaviour
 {
-    private CharacterController controller;
-    private Vector3 direction;
-    public float speed = 5.0f;
+    public Transform target;
+    private Vector3 offset;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        offset = transform.position - target.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        direction.z = speed;
+        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, offset.z + target.position.z);
+        transform.position = newPosition;
     }
 
     private void FixedUpdate()
     {
-        controller.Move(direction * Time.fixedDeltaTime);
+
     }
 }

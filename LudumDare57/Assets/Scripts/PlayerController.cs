@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     private int defaultLayer;
     public string noCollisionLayerName = "no collision";
     bool isInvincible = false;
-    float invincibleTime = 1f;
+    float invincibleTime = .25f;
+    bool inLockout = false;
+    float invincibleLockoutTime = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,16 +45,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("in invincible");
-            if (isInvincible == false)
-            {
-                StartCoroutine(Invincibility());
-            }
-        }
-
-        GlobalVariables.Timer(ref isInvincible, ref invincibleTime);
+        GlobalVariables.Timer(ref inLockout, ref invincibleLockoutTime);
 
         Vector3 targetPosition = transform.position.z * transform.forward + transform.position.y * transform.up;
         if (lane == 0)
@@ -93,10 +86,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void invincibilityPress()
+    {
+        Debug.Log("in invincible");
+        if (isInvincible == false && inLockout == false)
+        {
+            isInvincible = true;
+            inLockout = true;
+            invincibleLockoutTime = 1f;
+            StartCoroutine(Invincibility());
+        }
+    }
+
     private System.Collections.IEnumerator Invincibility()
     {
         gameObject.layer = LayerMask.NameToLayer(noCollisionLayerName);
         yield return new WaitForSeconds(invincibleTime);
         gameObject.layer = defaultLayer;
+        isInvincible = false;
     }
 }
