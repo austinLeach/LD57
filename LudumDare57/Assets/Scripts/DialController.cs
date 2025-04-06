@@ -43,13 +43,14 @@ namespace UnityEngine.UI.Extensions
         public int snapStepsPerLoop = 10;
         [Space(30)]
         public KnobFloatValueEvent OnValueChanged;
-        private float _currentLoops = 250;
+        private float _currentLoops = 500;
         private float _previousValue = 0;
         private float _initAngle;
         private float _currentAngle;
         private Vector2 _currentVector;
         private Quaternion _initRotation;
         private bool _canDrag = false;
+        private bool _isDragging = false;
         private bool _screenSpaceOverlay;
 
         protected override void Awake()
@@ -60,6 +61,7 @@ namespace UnityEngine.UI.Extensions
         public override void OnPointerUp(PointerEventData eventData)
         {
             _canDrag = false;
+            _isDragging = false;
         }
         public override void OnPointerEnter(PointerEventData eventData)
         {
@@ -73,26 +75,29 @@ namespace UnityEngine.UI.Extensions
 
         public override void OnPointerDown(PointerEventData eventData)
         {
-            _canDrag = true;
-
-            base.OnPointerDown(eventData);
-
-            _initRotation = transform.rotation;
-            if (_screenSpaceOverlay)
+            if (_canDrag)
             {
-                _currentVector = eventData.position - (Vector2)transform.position;
+                _isDragging = true;
+
+                base.OnPointerDown(eventData);
+
+                _initRotation = transform.rotation;
+                if (_screenSpaceOverlay)
+                {
+                    _currentVector = eventData.position - (Vector2)transform.position;
+                }
+                else
+                {
+                    _currentVector = eventData.position - (Vector2)Camera.main.WorldToScreenPoint(transform.position);
+                }
+                _initAngle = Mathf.Atan2(_currentVector.y, _currentVector.x) * Mathf.Rad2Deg;
             }
-            else
-            {
-                _currentVector = eventData.position - (Vector2)Camera.main.WorldToScreenPoint(transform.position);
-            }
-            _initAngle = Mathf.Atan2(_currentVector.y, _currentVector.x) * Mathf.Rad2Deg;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             //CHECK IF CAN DRAG
-            if (!_canDrag)
+            if (!_isDragging)
             {
                 return;
             }
