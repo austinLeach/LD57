@@ -18,7 +18,6 @@ using UnityEngine.EventSystems;
 /// - OnValueChanged - event that is called every frame while rotating knob, sends <float> argument of knobValue
 /// NOTES
 /// - script works only in images rotation on Z axis;
-/// - while dragging outside of control, the rotation will be canceled
 /// </summary>
 /// 
 namespace UnityEngine.UI.Extensions
@@ -60,7 +59,6 @@ namespace UnityEngine.UI.Extensions
 
         public override void OnPointerUp(PointerEventData eventData)
         {
-            _canDrag = false;
             _isDragging = false;
         }
         public override void OnPointerEnter(PointerEventData eventData)
