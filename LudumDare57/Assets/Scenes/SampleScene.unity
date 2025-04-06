@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 159453901}
   - component: {fileID: 159453904}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Dial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
