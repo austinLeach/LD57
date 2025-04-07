@@ -140,7 +140,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3373722896997935274, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
       propertyPath: maximum
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3373722896997935274, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
       propertyPath: mainCamera
@@ -520,8 +520,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5f6361535dc2f314aac87e08db3f8831, type: 3}
-  m_Resource: {fileID: 8300000, guid: 5f6361535dc2f314aac87e08db3f8831, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2d45c5c7798d3914dbb6fc2211101e4c, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2d45c5c7798d3914dbb6fc2211101e4c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.349
   m_Pitch: 1
@@ -917,8 +917,8 @@ AudioSource:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 400807978}
   - {fileID: 1741675718}
+  - {fileID: 400807978}
   - {fileID: 383342585}
   - {fileID: 367213162}
   - {fileID: 1134533586}

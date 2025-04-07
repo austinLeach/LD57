@@ -140,7 +140,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3373722896997935274, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
       propertyPath: maximum
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3373722896997935274, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
       propertyPath: mainCamera
@@ -332,7 +332,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8860352282204945905, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
       propertyPath: isStarting
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860352282204945905, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: localStarting
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -516,8 +520,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5f6361535dc2f314aac87e08db3f8831, type: 3}
-  m_Resource: {fileID: 8300000, guid: 5f6361535dc2f314aac87e08db3f8831, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f494ae69f196b224b8fe857d8a857797, type: 3}
+  m_Resource: {fileID: 8300000, guid: f494ae69f196b224b8fe857d8a857797, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.349
   m_Pitch: 1
