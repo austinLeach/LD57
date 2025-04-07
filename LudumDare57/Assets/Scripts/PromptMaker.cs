@@ -98,14 +98,13 @@ public class PromptMaker : MonoBehaviour
 
     void MakePrompt()
     {
-        int random = 10;
-        while (random ==  lastRandom) {
-             random = Random.Range(0, 5);
-        }
+        int random;
+        do
+        {
+            random = Random.Range(0, 5);
+        } while (random == lastRandom);
         lastRandom = random;
 
-        Debug.Log(random);
-        random = 4;
         if (random == 0 && warpButton.current < warpButton.maximum)
         {
             uiLever.SetGoalAngle();
