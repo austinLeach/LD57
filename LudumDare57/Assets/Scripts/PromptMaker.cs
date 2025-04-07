@@ -24,72 +24,84 @@ public class PromptMaker : MonoBehaviour
     private float panicTimer;
     [SerializeField] public TextMeshProUGUI instructionsText;
     private string promptText;
-
+    public bool isStarting = true;
+    public float startTimer = 5f;
 
 
     private void Start()
     {
-        
+        if (isStarting)
+        {
+            ShowInstructions("Stay alive and do the prompts in order to activate the WARP");
+        }
         panicTimer = Random.Range(10, 30);
-       // ShowInstructions("Stay alive and do the prompts in order to activate the WARP");
-        MakePrompt();
         //buttonMatrixPrompt.SetActive(false);
     }
 
     private void Update()
     {
+        if (isStarting)
+        {
+            GlobalVariables.Timer(ref isStarting, ref startTimer);
+            GlobalVariables.Timer(ref isNotPanicing, ref panicTimer);
+            return;
+        }
         if (!activePrompt)
         {
             MakePrompt();
         }
-        if (isUiLeverPrompt)
+        if (!panicingActivated)
         {
-            if (uiLever.CheckWin())
+            if (isUiLeverPrompt)
             {
-                isUiLeverPrompt = false;
-                activePrompt = false;
-                warpButton.current++;
+                if (uiLever.CheckWin())
+                {
+                    isUiLeverPrompt = false;
+                    activePrompt = false;
+                    warpButton.current++;
+                }
             }
-        }
-        if (isDialPrompt)
-        {
-            if (dial.CheckGoalReached())
+            if (isDialPrompt)
             {
-                isDialPrompt = false;
-                activePrompt = false;
-                warpButton.current++;
+                if (dial.CheckGoalReached())
+                {
+                    isDialPrompt = false;
+                    activePrompt = false;
+                    warpButton.current++;
+                }
             }
-        }
-        if (isDropdownPrompt)
-        {
-            if (dropdown.CheckWin())
+            if (isDropdownPrompt)
             {
-                isDropdownPrompt = false;
-                activePrompt = false;
-                warpButton.current++;
+                if (dropdown.CheckWin())
+                {
+                    isDropdownPrompt = false;
+                    activePrompt = false;
+                    warpButton.current++;
+                }
             }
-        }
-        if (isSliderPrompt)
-        {
-            if (sliders.CheckWinCondition())
+            if (isSliderPrompt)
             {
-                isSliderPrompt = false;
-                activePrompt = false;
-                warpButton.current++;
+                if (sliders.CheckWinCondition())
+                {
+                    isSliderPrompt = false;
+                    activePrompt = false;
+                    warpButton.current++;
+                }
             }
-        }
-        if (isMatrixPrompt)
-        {
-            if (buttonMatrix.CheckForSuccess())
+            if (isMatrixPrompt)
             {
-                instructionsText.gameObject.SetActive(true);
-                buttonMatrixPrompt.SetActive(false);
-                isMatrixPrompt = false;
-                activePrompt = false;
-                warpButton.current++;
+                if (buttonMatrix.CheckForSuccess())
+                {
+                    instructionsText.gameObject.SetActive(true);
+                    buttonMatrixPrompt.SetActive(false);
+                    isMatrixPrompt = false;
+                    activePrompt = false;
+                    warpButton.current++;
+                }
             }
         }
         GlobalVariables.Timer(ref isNotPanicing, ref panicTimer);
+
         if (!isNotPanicing)
         {
             PanicTime();

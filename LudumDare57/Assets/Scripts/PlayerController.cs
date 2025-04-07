@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,9 +14,10 @@ public class PlayerController : MonoBehaviour
     private int defaultLayer;
     public string noCollisionLayerName = "no collision";
     bool isInvincible = false;
-    float invincibleTime = .3f;
+    float invincibleTime = .5f;
     bool inLockout = false;
     float invincibleLockoutTime = 1f;
+    public int health = 5;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -68,7 +70,10 @@ public class PlayerController : MonoBehaviour
         {
             controller.Move(diff);
         }
-
+        if (health == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         
     }
 
@@ -83,6 +88,11 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(hit.gameObject);
             Debug.Log("collision detected");
+            health--;
+        }
+        if (hit.transform.tag == "EndWall")
+        {
+            health = 0;
         }
     }
 

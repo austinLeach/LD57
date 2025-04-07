@@ -9,6 +9,7 @@ public class WarpButton : MonoBehaviour
     public Image mask;
     public Button warpButton;
     public Toggle keyToggle;
+    public PlayerController playerController;
 
     public Camera mainCamera;
     public float fovIncreaseAmount = 20f; // How much to increase the FOV by
@@ -57,6 +58,8 @@ public class WarpButton : MonoBehaviour
     }
     private IEnumerator WarpFOVEffect()
     {
+        playerController.speed = 5;
+        playerController.health = 5;
         originalFOV = mainCamera.fieldOfView;
         float targetFOV = originalFOV + fovIncreaseAmount;
         float elapsed = 0f;
