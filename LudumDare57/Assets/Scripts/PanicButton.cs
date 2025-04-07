@@ -19,7 +19,7 @@ public class PanicButton : MonoBehaviour
         {
             goalAchieved = true;
             isPanicing = false;
-            Debug.Log("Panic resolved");
+            //Debug.Log("Panic resolved");
         }
     }
 

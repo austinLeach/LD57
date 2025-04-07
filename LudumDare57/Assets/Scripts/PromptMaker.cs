@@ -1,3 +1,5 @@
+
+using TMPro;
 using UnityEngine;
 
 public class PromptMaker : MonoBehaviour
@@ -8,6 +10,7 @@ public class PromptMaker : MonoBehaviour
     public DropdownPuzzle dropdown;
     public MultiScrollbarController sliders;
     public buttonMatrixController buttonMatrix;
+    public GameObject buttonMatrixPrompt;
     public PanicButton panicButton;
     private bool activePrompt = false;
     private bool isUiLeverPrompt = false;
@@ -19,12 +22,18 @@ public class PromptMaker : MonoBehaviour
     private bool isNotPanicing = true;
     private bool panicingActivated = false;
     private float panicTimer;
+    [SerializeField] public TextMeshProUGUI instructionsText;
+    private string promptText;
+
 
 
     private void Start()
     {
-        MakePrompt();
+        
         panicTimer = Random.Range(10, 30);
+       // ShowInstructions("Stay alive and do the prompts in order to activate the WARP");
+        MakePrompt();
+        //buttonMatrixPrompt.SetActive(false);
     }
 
     private void Update()
@@ -73,6 +82,8 @@ public class PromptMaker : MonoBehaviour
         {
             if (buttonMatrix.CheckForSuccess())
             {
+                instructionsText.gameObject.SetActive(true);
+                buttonMatrixPrompt.SetActive(false);
                 isMatrixPrompt = false;
                 activePrompt = false;
                 warpButton.current++;
@@ -85,10 +96,21 @@ public class PromptMaker : MonoBehaviour
             isNotPanicing = true;
             panicTimer = Random.Range(15, 30);
         }
+        Debug.Log(panicingActivated);
         if (panicingActivated)
         {
+            Debug.Log(panicButton.PanicWin());
             if (panicButton.PanicWin())
             {
+                if (isMatrixPrompt)
+                {
+                    instructionsText.gameObject.SetActive(false);
+                    buttonMatrixPrompt.SetActive(true);
+                } else
+                {
+                    instructionsText.gameObject.SetActive(true);
+                    ShowInstructions(promptText);
+                }
                 panicingActivated = false;
                 warpButton.current++;
             }
@@ -98,6 +120,11 @@ public class PromptMaker : MonoBehaviour
 
     void MakePrompt()
     {
+        if (warpButton.current == warpButton.maximum)
+        {
+            promptText = "Turn key and activate WARP";
+            ShowInstructions(promptText);
+        }
         int random;
         do
         {
@@ -108,29 +135,39 @@ public class PromptMaker : MonoBehaviour
         if (random == 0 && warpButton.current < warpButton.maximum)
         {
             uiLever.SetGoalAngle();
+            promptText = "Flip the lever";
+            ShowInstructions(promptText);
             isUiLeverPrompt = true;
         }
 
         if (random == 1 && warpButton.current < warpButton.maximum)
         {
-            dial.SetRandomGoal();
+            string dialNumber = dial.SetRandomGoal();
+            promptText = $"Set the dial to {dialNumber}";
+            ShowInstructions(promptText);
             isDialPrompt = true;
         }
 
         if (random == 2 && warpButton.current < warpButton.maximum)
         {
-            dropdown.GenerateRandomWinCondition();
+            string winOption = dropdown.GenerateRandomWinCondition();
+            promptText = $"Change the Sub Systems to {winOption}";
+            ShowInstructions(promptText);
             isDropdownPrompt = true;
         }
 
         if (random == 3 && warpButton.current < warpButton.maximum)
         {
-            sliders.GenerateTargetSequence();
+            string winNumber = sliders.GenerateTargetSequence();
+            promptText = $"Move Sliders to {winNumber}";
+            ShowInstructions(promptText);
             isSliderPrompt = true;
         }
         
         if (random == 4 && warpButton.current < warpButton.maximum)
         {
+            instructionsText.gameObject.SetActive(false);
+            buttonMatrixPrompt.SetActive(true);
             buttonMatrix.GenerateTargetPattern();
             isMatrixPrompt = true;
         }
@@ -140,7 +177,25 @@ public class PromptMaker : MonoBehaviour
 
     void PanicTime()
     {
+        if (isMatrixPrompt)
+        {
+            buttonMatrixPrompt.SetActive(false);
+        }
+        if (warpButton.current == warpButton.maximum) {
+            return;
+        }
+        panicingActivated = true;
         panicButton.SetPanicState();
-        
+        string panicPrompt = "PRESS THE PANIC BUTTON";
+        ShowInstructions(panicPrompt);
     }
+
+    public void ShowInstructions(string instructions)
+    {
+        if (instructionsText != null)
+        {
+            instructionsText.text = instructions;
+        }
+    }
+    
 }

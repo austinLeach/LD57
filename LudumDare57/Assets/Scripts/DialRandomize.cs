@@ -31,12 +31,13 @@ public class DialRandomize : MonoBehaviour
 
     }
 
-    public void SetRandomGoal()
+    public string SetRandomGoal()
     {
+        goalReached = false;
         float current = knobControl.knobValue;
 
         // Tolerance for float comparison
-        float epsilon = 0.001f;
+        float epsilon = 0.01f;
 
         // Create a list of valid options excluding the current (and 1 if current is 0, or 0 if current is 1)
         List<float> validOptions = new List<float>(knobSteps);
@@ -44,20 +45,31 @@ public class DialRandomize : MonoBehaviour
 
         // Pick a random goal from the filtered list
         goalValue = validOptions[Random.Range(0, validOptions.Count)];
+        int goalIndex = knobSteps.FindIndex(step => Mathf.Abs(step - goalValue) < epsilon);
+        int displayNumber = (goalIndex == 0 || goalIndex == 6) ? 1 : goalIndex + 1;
 
-        Debug.Log($"Knob is at {current}, new goal is {goalValue}");
+        return ($"{displayNumber}");
     }
 
     public bool CheckGoalReached()
     {
-        if (knobControl.knobValue == 1)
-            knobControl.knobValue = 0;
-        if (goalValue == knobControl.knobValue)
+        float epsilon = 0.01f;
+
+        float currentValue = knobControl.knobValue;
+        if (Mathf.Abs(currentValue - 1f) < epsilon)
+            currentValue = 0f;
+
+        float goal = goalValue;
+        if (Mathf.Abs(goal - 1f) < epsilon)
+            goal = 0f;
+
+        if (Mathf.Abs(goal - currentValue) < epsilon)
         {
             goalReached = true;
             Debug.Log("Dial solved");
             return true;
         }
+
         return false;
     }
 

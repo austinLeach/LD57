@@ -14,7 +14,7 @@ public class MultiScrollbarController : MonoBehaviour
     public ScrollbarGroup[] scrollbars;
 
     private int steps = 5;
-    private int[] targetValues = new int[5]; // Random target values the user must match
+    private int[] targetValues = new int[3]; // Random target values the user must match
 
     void Start()
     {
@@ -25,13 +25,14 @@ public class MultiScrollbarController : MonoBehaviour
         }
     }
 
-    public void GenerateTargetSequence()
+    public string GenerateTargetSequence()
     {
         for (int i = 0; i < targetValues.Length; i++)
         {
             targetValues[i] = Random.Range(1, steps + 1); // 1–5
         }
-        Debug.Log($"Slider solution: {targetValues[0]}{targetValues[1]}{targetValues[2]}{targetValues[3]}{targetValues[4]}");
+
+        return $"{targetValues[0]}{targetValues[1]}{targetValues[2]}";
     }
 
     void SetupScrollbar(ScrollbarGroup group, int index)

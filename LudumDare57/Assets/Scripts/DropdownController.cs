@@ -15,10 +15,12 @@ public class DropdownPuzzle : MonoBehaviour
         currentSelectedIndex = dropdown.value;
     }
 
-    public void GenerateRandomWinCondition()
+    public string GenerateRandomWinCondition()
     {
         hasWon = false;
         int optionCount = dropdown.options.Count;
+
+        currentSelectedIndex = dropdown.value;
 
         // Step 1: Pick random win index, but make sure it is not the current selected index
         do
@@ -26,10 +28,12 @@ public class DropdownPuzzle : MonoBehaviour
             winIndex = Random.Range(0, optionCount);
         } while (winIndex == currentSelectedIndex);
 
-        Debug.Log($"Win option is: {dropdown.options[winIndex].text}");
+        string winOption = $"{dropdown.options[winIndex].text}";
 
         // Step 2: Hook up the listener for dropdown selection
+        dropdown.onValueChanged.RemoveListener(CheckSelection);
         dropdown.onValueChanged.AddListener(CheckSelection);
+        return winOption;
     }
 
     public void CheckSelection(int selectedIndex)

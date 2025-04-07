@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class WarpButton : MonoBehaviour
 {
@@ -8,6 +9,13 @@ public class WarpButton : MonoBehaviour
     public Image mask;
     public Button warpButton;
     public Toggle keyToggle;
+
+    public Camera mainCamera;
+    public float fovIncreaseAmount = 20f; // How much to increase the FOV by
+    public float effectDuration = 1.5f; // Duration of the FOV effect
+
+    private float originalFOV;
+    private Coroutine fovCoroutine;
 
     private void Start()
     {
@@ -39,4 +47,31 @@ public class WarpButton : MonoBehaviour
             warpButton.interactable = isAtMax && keyToggle.isOn;
         }
     }
+    
+    public void ActivateWarp()
+    {
+        if (fovCoroutine == null)
+        {
+            fovCoroutine = StartCoroutine(WarpFOVEffect());
+        }
+    }
+    private IEnumerator WarpFOVEffect()
+    {
+        originalFOV = mainCamera.fieldOfView;
+        float targetFOV = originalFOV + fovIncreaseAmount;
+        float elapsed = 0f;
+
+        while (elapsed < effectDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / effectDuration;
+            mainCamera.fieldOfView = Mathf.Lerp(originalFOV, targetFOV, t);
+            yield return null;
+        }
+
+        // Reset FOV after reaching peak
+        mainCamera.fieldOfView = originalFOV;
+        fovCoroutine = null;
+    }
+
 }
