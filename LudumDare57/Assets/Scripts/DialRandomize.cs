@@ -23,12 +23,12 @@ public class DialRandomize : MonoBehaviour
 
     private void Start()
     {
-        SetRandomGoal();
+
     }
 
     private void Update()
     {
-        CheckGoalReached();
+
     }
 
     public void SetRandomGoal()
@@ -48,7 +48,7 @@ public class DialRandomize : MonoBehaviour
         Debug.Log($"Knob is at {current}, new goal is {goalValue}");
     }
 
-    public void CheckGoalReached()
+    public bool CheckGoalReached()
     {
         if (knobControl.knobValue == 1)
             knobControl.knobValue = 0;
@@ -56,7 +56,9 @@ public class DialRandomize : MonoBehaviour
         {
             goalReached = true;
             Debug.Log("Dial solved");
+            return true;
         }
+        return false;
     }
 
     // Helper to check if one value is 0 and the other is 1 (or vice versa)

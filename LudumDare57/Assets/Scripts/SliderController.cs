@@ -18,7 +18,6 @@ public class MultiScrollbarController : MonoBehaviour
 
     void Start()
     {
-        GenerateTargetSequence();
 
         for (int i = 0; i < scrollbars.Length; i++)
         {
@@ -26,7 +25,7 @@ public class MultiScrollbarController : MonoBehaviour
         }
     }
 
-    void GenerateTargetSequence()
+    public void GenerateTargetSequence()
     {
         for (int i = 0; i < targetValues.Length; i++)
         {
@@ -59,7 +58,7 @@ public class MultiScrollbarController : MonoBehaviour
         group.numberText.text = (stepIndex + 1).ToString();
     }
 
-    void CheckWinCondition()
+    public bool CheckWinCondition()
     {
         for (int i = 0; i < scrollbars.Length; i++)
         {
@@ -67,9 +66,11 @@ public class MultiScrollbarController : MonoBehaviour
             int currentValue = Mathf.RoundToInt(scrollbars[i].scrollbar.value / stepSize) + 1;
 
             if (currentValue != targetValues[i])
-                return; // Not matching yet
+                return false; // Not matching yet
         }
 
         Debug.Log("Puzzle solved!");
+        return true;
+        
     }
 }

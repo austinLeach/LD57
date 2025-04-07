@@ -7,18 +7,17 @@ public class DropdownPuzzle : MonoBehaviour
 
     private int winIndex;
     private int currentSelectedIndex;
+    private bool hasWon = false;
 
     void Start()
     {
         // Store the current selected option
         currentSelectedIndex = dropdown.value;
-
-        // Generate the random win condition, avoiding the current selected option
-        GenerateRandomWinCondition();
     }
 
-    void GenerateRandomWinCondition()
+    public void GenerateRandomWinCondition()
     {
+        hasWon = false;
         int optionCount = dropdown.options.Count;
 
         // Step 1: Pick random win index, but make sure it is not the current selected index
@@ -33,13 +32,20 @@ public class DropdownPuzzle : MonoBehaviour
         dropdown.onValueChanged.AddListener(CheckSelection);
     }
 
-    void CheckSelection(int selectedIndex)
+    public void CheckSelection(int selectedIndex)
     {
         if (selectedIndex == winIndex)
         {
             Debug.Log("Correct choice! Puzzle solved!");
-            // Add your win logic here!
-            GenerateRandomWinCondition();
+            hasWon = true;
         }
+    }
+    public bool CheckWin()
+    {
+        if (hasWon)
+        {
+            return true;
+        }
+        return false;
     }
 }

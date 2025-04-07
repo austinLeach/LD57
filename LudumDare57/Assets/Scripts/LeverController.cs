@@ -23,10 +23,10 @@ public class UILever : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
 
     private void Start()
     {
-        SetGoalAngle();
+
     }
 
-    void SetGoalAngle()
+    public void SetGoalAngle()
     {
         float current = GetNearestAnchorAngle(GetCurrentAngle());
 
@@ -34,14 +34,16 @@ public class UILever : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
         Debug.Log("Goal Angle: " + goalAngle);
     }
 
-    public void CheckWin()
+    public bool CheckWin()
     {
         float current = GetNearestAnchorAngle(GetCurrentAngle());
         if (current == goalAngle)
         {
             Debug.Log("Lever Goal Accomplished");
             goalAngle = 180;
+            return true;
         }
+        return false;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -76,7 +78,6 @@ public class UILever : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
         // Apply the smooth angle to the rotation
         rectTransform.localEulerAngles = new Vector3(0, 0, smoothed);
 
-        CheckWin();
     }
 
     private float GetCurrentAngle()

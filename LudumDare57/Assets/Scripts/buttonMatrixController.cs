@@ -12,16 +12,16 @@ public class buttonMatrixController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GenerateTargetPattern();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckForSuccess();
+
     }
 
-    void GenerateTargetPattern()
+    public void GenerateTargetPattern()
     {
         string patternDisplay = "Target Pattern:\n";
         for (int i = 0; i < 9; i++)
@@ -38,15 +38,15 @@ public class buttonMatrixController : MonoBehaviour
         Debug.Log(patternDisplay);
     }
 
-    void CheckForSuccess()
+    public bool CheckForSuccess()
     {
         for (int i = 0; i < 9; i++)
         {
             if (toggleArr[i].isOn != promptArr[i].isOn)
-                return;
+                return false;
         }
 
         Debug.Log("Puzzle Solved!");
-        // You can trigger any success action here (e.g., open a door)
+        return true;
     }
 }

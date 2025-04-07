@@ -5,32 +5,38 @@ public class PanicButton : MonoBehaviour
 {
     public Button myButton; // Assign this in the Inspector
     private bool goalAchieved = false;
+    private bool isPanicing = false;
 
     void Start()
     {
         // Set up the listener for the button press
         myButton.onClick.AddListener(PANIC);
-
-        // Create the goal (initial state)
-        goalAchieved = false;
-        Debug.Log("Panicing Waiting for button press...");
     }
 
-    void PANIC()
+    public void PANIC()
     {
-        // Update the goal status
-        goalAchieved = true;
-        Debug.Log("Panic resolved");
-
-        // You can add any additional logic here
+        if (isPanicing)
+        {
+            goalAchieved = true;
+            isPanicing = false;
+            Debug.Log("Panic resolved");
+        }
     }
 
     void Update()
     {
-        // You could do checks here if needed
-        if (goalAchieved)
-        {
-           
-        }
+
+    }
+    
+    public void SetPanicState()
+    {
+        Debug.Log("Panicing Waiting for button press...");
+        goalAchieved =false;
+        isPanicing = true;
+    }
+
+    public bool PanicWin()
+    {
+        return goalAchieved;
     }
 }
