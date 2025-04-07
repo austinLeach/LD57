@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,8 @@ public class PlayerController : MonoBehaviour
     float invincibleLockoutTime = 1f;
     public int health = 5;
     private SpriteRenderer sprite;
+    public TextMeshProUGUI healthText;
+    public GameObject gameOverPanel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,11 +29,14 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         controller = GetComponent<CharacterController>();
         defaultLayer = gameObject.layer;
+        gameOverPanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateHealthUI();
         direction.z = speed;
 
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
@@ -72,9 +78,9 @@ public class PlayerController : MonoBehaviour
         {
             controller.Move(diff);
         }
-        if (health == 0)
+        if (health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            HandleGameOver();
         }
         
     }
@@ -90,7 +96,9 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(hit.gameObject);
             Debug.Log("collision detected");
+
             health--;
+
         }
         if (hit.transform.tag == "EndWall")
         {
@@ -118,5 +126,24 @@ public class PlayerController : MonoBehaviour
         gameObject.layer = defaultLayer;
         sprite.enabled = true;
         isInvincible = false;
+    }
+
+
+    private void UpdateHealthUI()
+    {
+        if (healthText != null)
+            healthText.text = "Health: " + health;
+    }
+
+    private void HandleGameOver()
+    {
+        Time.timeScale = 0f; // Pause the game
+        gameOverPanel.SetActive(true); // Show the retry button
+    }
+
+    public void Retry()
+    {
+        Time.timeScale = 1f; // Unpause before reloading
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
