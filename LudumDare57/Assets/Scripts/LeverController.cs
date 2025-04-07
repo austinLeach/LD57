@@ -12,6 +12,8 @@ public class UILever : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
     private float targetAngle;
     private bool isDragging = false;
     private float goalAngle;
+    public AudioClip[] leverSounds;
+    private AudioSource audioSource;
 
     void Awake()
     {
@@ -19,6 +21,7 @@ public class UILever : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
         // Set the initial rotation to 45 degrees
         targetAngle = -45f;
         rectTransform.localEulerAngles = new Vector3(0, 0, targetAngle);
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -60,6 +63,16 @@ public class UILever : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointe
         // Calculate the rotation delta based on mouse movement
         float rotationDelta = -delta.y * rotationSpeed;
         targetAngle = Mathf.Clamp(GetCurrentAngle() + rotationDelta, anchorAngles[0], anchorAngles[anchorAngles.Length - 1]);
+
+        if (leverSounds.Length > 0 && audioSource != null)
+        {
+            if (!audioSource.isPlaying)
+            {
+                int index = Random.Range(0, leverSounds.Length);
+                audioSource.clip = leverSounds[index];
+                audioSource.Play();
+            }
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)

@@ -18,10 +18,12 @@ public class PlayerController : MonoBehaviour
     bool inLockout = false;
     float invincibleLockoutTime = 1f;
     public int health = 5;
+    private SpriteRenderer sprite;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        sprite = GetComponent<SpriteRenderer>();
         controller = GetComponent<CharacterController>();
         defaultLayer = gameObject.layer;
     }
@@ -104,6 +106,7 @@ public class PlayerController : MonoBehaviour
             isInvincible = true;
             inLockout = true;
             invincibleLockoutTime = .75f;
+            sprite.enabled = false;
             StartCoroutine(Invincibility());
         }
     }
@@ -113,6 +116,7 @@ public class PlayerController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(noCollisionLayerName);
         yield return new WaitForSeconds(invincibleTime);
         gameObject.layer = defaultLayer;
+        sprite.enabled = true;
         isInvincible = false;
     }
 }

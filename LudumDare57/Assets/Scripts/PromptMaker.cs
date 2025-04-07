@@ -24,26 +24,33 @@ public class PromptMaker : MonoBehaviour
     private float panicTimer;
     [SerializeField] public TextMeshProUGUI instructionsText;
     private string promptText;
+    public bool localStarting = true;
     public bool isStarting = true;
     public float startTimer = 5f;
-
+    private AudioSource audioSource;
+    public AudioClip panicSound;
+    public AudioClip panicResolved;
 
     private void Start()
     {
-        if (isStarting)
+        if (localStarting)
         {
             ShowInstructions("Stay alive and do the prompts in order to activate the WARP");
         }
         panicTimer = Random.Range(10, 30);
+        audioSource = GetComponent<AudioSource>();
         //buttonMatrixPrompt.SetActive(false);
     }
 
     private void Update()
     {
-        if (isStarting)
+        if (localStarting)
         {
             GlobalVariables.Timer(ref isStarting, ref startTimer);
             GlobalVariables.Timer(ref isNotPanicing, ref panicTimer);
+            if (!isStarting) {
+                localStarting = false;
+            }
             return;
         }
         if (!activePrompt)
@@ -123,11 +130,15 @@ public class PromptMaker : MonoBehaviour
                     instructionsText.gameObject.SetActive(true);
                     ShowInstructions(promptText);
                 }
+                audioSource.Stop();
+                audioSource.PlayOneShot(panicResolved);
                 panicingActivated = false;
                 warpButton.current++;
             }
             
         }
+
+
     }
 
     void MakePrompt()
@@ -192,16 +203,21 @@ public class PromptMaker : MonoBehaviour
         if (isMatrixPrompt)
         {
             buttonMatrixPrompt.SetActive(false);
+            instructionsText.gameObject.SetActive(true);
         }
-        if (warpButton.current == warpButton.maximum) {
+        if (warpButton.current == warpButton.maximum)
+        {
             return;
         }
         panicingActivated = true;
         panicButton.SetPanicState();
         string panicPrompt = "PRESS THE PANIC BUTTON";
         ShowInstructions(panicPrompt);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(panicSound);
+        }
     }
-
     public void ShowInstructions(string instructions)
     {
         if (instructionsText != null)

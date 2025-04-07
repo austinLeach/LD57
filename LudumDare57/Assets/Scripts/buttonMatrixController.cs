@@ -8,11 +8,13 @@ public class buttonMatrixController : MonoBehaviour
 
     private bool[] targetPattern = new bool[9];
 
+    public AudioClip clickSound;
+    private AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,5 +50,10 @@ public class buttonMatrixController : MonoBehaviour
 
         Debug.Log("Puzzle Solved!");
         return true;
+    }
+
+    public void PlaySound()
+    {
+        audioSource.PlayOneShot(clickSound);
     }
 }

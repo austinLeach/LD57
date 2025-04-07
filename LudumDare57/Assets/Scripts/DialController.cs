@@ -51,6 +51,8 @@ namespace UnityEngine.UI.Extensions
         private bool _canDrag = false;
         private bool _isDragging = false;
         private bool _screenSpaceOverlay;
+        public AudioClip clickSound;
+        private AudioSource audioSource;
 
         protected override void Awake()
         {
@@ -200,6 +202,20 @@ namespace UnityEngine.UI.Extensions
         public virtual void OnInitializePotentialDrag(PointerEventData eventData)
         {
             eventData.useDragThreshold = false;
+        }
+
+        public void Start()
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        public void PlaySound()
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(clickSound);
+            }
+            
         }
     }
 

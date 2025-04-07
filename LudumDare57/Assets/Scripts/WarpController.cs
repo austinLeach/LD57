@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class WarpButton : MonoBehaviour
 {
@@ -18,8 +19,12 @@ public class WarpButton : MonoBehaviour
     private float originalFOV;
     private Coroutine fovCoroutine;
 
+    public AudioClip warpSound;
+    private AudioSource audioSource;
+
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         UpdateUIState();
         keyToggle.onValueChanged.AddListener(delegate { UpdateUIState(); });
     }
@@ -58,6 +63,7 @@ public class WarpButton : MonoBehaviour
     }
     private IEnumerator WarpFOVEffect()
     {
+        audioSource.PlayOneShot(warpSound);
         playerController.speed = 5;
         playerController.health = 5;
         originalFOV = mainCamera.fieldOfView;
@@ -75,6 +81,8 @@ public class WarpButton : MonoBehaviour
         // Reset FOV after reaching peak
         mainCamera.fieldOfView = originalFOV;
         fovCoroutine = null;
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentIndex + 1);
     }
 
 }
