@@ -676,14 +676,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs:
-  - {fileID: 6220464230234535825, guid: abe075042824bab4ca21c71be291c0ee, type: 3}
-  - {fileID: 2298525092193834101, guid: b0bc210f0a741de439d3fe9568df1dbd, type: 3}
-  - {fileID: 4813309283860990879, guid: 9e6635f9a07507e47b88e11573ce2008, type: 3}
-  - {fileID: 8841169640229616589, guid: b850f4de59e6f6b4a8f535d3a57df1bf, type: 3}
-  - {fileID: 1420222045353396181, guid: f3b3db7130305d9408edb72e5149ffa4, type: 3}
-  - {fileID: 5299854265728524946, guid: d75f3f32de2cf5541be10c3f7cf5c3c7, type: 3}
-  - {fileID: 3486364220972349124, guid: dfab186cdd259054aa25f1ba495fb263, type: 3}
-  - {fileID: 7549327304212991226, guid: f1b794e1a56ddf143906e3fcebc19a35, type: 3}
+  - {fileID: 6220464230234535825, guid: ff0db9fd838303c4790b12421906f6d8, type: 3}
+  - {fileID: 2298525092193834101, guid: 16e90478fa96c8e4e9072c01e6efbf33, type: 3}
+  - {fileID: 4813309283860990879, guid: fe7b4392073a0a149b2157f668ab6e48, type: 3}
+  - {fileID: 8841169640229616589, guid: 6905dfc926d36074e94bf303f81ee36e, type: 3}
+  - {fileID: 1420222045353396181, guid: 3dbb3df43126d8a4984a84ba46da9281, type: 3}
+  - {fileID: 5299854265728524946, guid: 202b43d0b4a8dd3408e9042de472ad37, type: 3}
+  - {fileID: 3486364220972349124, guid: 4f02f3723303c194bac5c47c476c05bc, type: 3}
+  - {fileID: 7549327304212991226, guid: b4390e7c9bafcd445b9152882ac3d173, type: 3}
   endWallTile: {fileID: 3097647585566798245, guid: 9a69e633dd144624b9f34db40151f923, type: 3}
   zSpawn: 0
   tileLength: 60
