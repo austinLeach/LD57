@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         }
         if (hit.transform.tag == "EndWall")
         {
-            health = 0;
+            HandleGameOver();
         }
     }
 

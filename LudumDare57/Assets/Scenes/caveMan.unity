@@ -138,6 +138,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2864545185870298071, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864545185870298071, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864545185870298071, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864545185870298071, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864545185870298071, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864545185870298071, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864545185870298071, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3373722896997935274, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
       propertyPath: maximum
       value: 10
@@ -150,6 +178,22 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 823446902}
+    - target: {fileID: 3473431148475848591, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 71.6853
+      objectReference: {fileID: 0}
+    - target: {fileID: 3473431148475848591, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 71.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3473431148475848591, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 73
+      objectReference: {fileID: 0}
+    - target: {fileID: 3473431148475848591, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3540386322652026321, guid: 92c03dcb0f0703d48b93e39163471c90, type: 3}
       propertyPath: OnValueChanged.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -676,14 +720,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefabs:
-  - {fileID: 6220464230234535825, guid: abe075042824bab4ca21c71be291c0ee, type: 3}
-  - {fileID: 2298525092193834101, guid: b0bc210f0a741de439d3fe9568df1dbd, type: 3}
-  - {fileID: 4813309283860990879, guid: 9e6635f9a07507e47b88e11573ce2008, type: 3}
-  - {fileID: 8841169640229616589, guid: b850f4de59e6f6b4a8f535d3a57df1bf, type: 3}
-  - {fileID: 1420222045353396181, guid: f3b3db7130305d9408edb72e5149ffa4, type: 3}
-  - {fileID: 5299854265728524946, guid: d75f3f32de2cf5541be10c3f7cf5c3c7, type: 3}
-  - {fileID: 3486364220972349124, guid: dfab186cdd259054aa25f1ba495fb263, type: 3}
-  - {fileID: 7549327304212991226, guid: f1b794e1a56ddf143906e3fcebc19a35, type: 3}
+  - {fileID: 6220464230234535825, guid: 417402cb84ca54142baee9f4876320d2, type: 3}
+  - {fileID: 2298525092193834101, guid: da665318d29b80841857ecfca7763ce7, type: 3}
+  - {fileID: 4813309283860990879, guid: bd5f9390dced08e4f97f2fcca7390510, type: 3}
+  - {fileID: 8841169640229616589, guid: 3f8c294c64414ce439559736a0334529, type: 3}
+  - {fileID: 1420222045353396181, guid: a379ad904abef164a81023f04d0a5086, type: 3}
+  - {fileID: 5299854265728524946, guid: bbb17eee951ee094db3d2f3224a74a10, type: 3}
+  - {fileID: 3486364220972349124, guid: dcf968b29ed92c246bed6169bc17da69, type: 3}
+  - {fileID: 7549327304212991226, guid: f034e88cb400db84ba1630eb87a0b00c, type: 3}
   endWallTile: {fileID: 3097647585566798245, guid: 9a69e633dd144624b9f34db40151f923, type: 3}
   zSpawn: 0
   tileLength: 60
