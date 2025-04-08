@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: grass
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_Parent: {fileID: 2100000, guid: 107e117649bd32e4fa907f57b2536de3, type: 2}
+  m_Parent: {fileID: 2100000, guid: 18f0ce4cac3843649a0a7d4061833354, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -27,15 +27,17 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: c0c7508721bb20e4c9fe83fc1d14c5c9, type: 3}
-        m_Scale: {x: 0.8, y: 1}
-        m_Offset: {x: 0.08, y: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: c0c7508721bb20e4c9fe83fc1d14c5c9, type: 3}
-        m_Scale: {x: 0.8, y: 1}
-        m_Offset: {x: 0.08, y: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats: []
-    m_Colors: []
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &5861721481655422710
